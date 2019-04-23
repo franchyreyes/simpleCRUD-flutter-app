@@ -31,6 +31,29 @@ class AppLocalizations {
     );
   }
 
+  String titleLabel() {
+    return Intl.message(
+      'title',
+      name: 'titleLabel',
+      desc: 'titleLabel for the Demo application',
+    );
+  }
+
+  String descriptionLabel() {
+    return Intl.message(
+      'description',
+      name: 'descriptionLabel',
+      desc: 'descriptionLabel for the Demo application',
+    );
+  }
+  String add() {
+    return Intl.message(
+      'Add new Movies',
+      name: 'add',
+      desc: 'add for the Demo application',
+    );
+  }
+
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.deepOrange,
       ),
-      home: MyHomePage(title: "todos"),
+      home: MyHomePage(title: ""),
       debugShowCheckedModeBanner: false,
       supportedLocales: [
         const Locale('en',''),
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context).title()),
       ),
       body: TodoList(),
     );
