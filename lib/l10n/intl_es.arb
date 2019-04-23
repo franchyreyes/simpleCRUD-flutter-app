@@ -1,0 +1,27 @@
+{"@@locale": "es",
+  "@@last_modified": "2019-04-23T10:24:02.829974",
+  "title": "Peliculas",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleLabel": "Titulo",
+  "@titleLabel": {
+    "description": "titleLabel for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descriptionLabel": "descripcion",
+  "@descriptionLabel": {
+    "description": "descriptionLabel for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "add": "Agregar nueva pelicula",
+  "@add": {
+    "description": "add for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}

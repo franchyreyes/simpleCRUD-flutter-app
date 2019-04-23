@@ -1,5 +1,7 @@
+import 'package:flutter_app/locale/locales.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/todolist.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 
 void main() => runApp(MyApp());
@@ -9,13 +11,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Todos',
+      onGenerateTitle: (BuildContext context) => AppLocalizations.of(context).title(),
       theme: ThemeData(
 
         primarySwatch: Colors.deepOrange,
       ),
-      home: MyHomePage(title: 'Todos'),
+      home: MyHomePage(title: ""),
       debugShowCheckedModeBanner: false,
+      supportedLocales: [
+        const Locale('en',''),
+        const Locale('es',''),
+      ],
+      localizationsDelegates: [
+        const AppLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
 
     );
   }
@@ -36,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: Text(widget.title),
+        title: Text(AppLocalizations.of(context).title()),
       ),
       body: TodoList(),
     );

@@ -1,0 +1,27 @@
+{"@@locale": "en",
+  "@@last_modified": "2019-04-23T10:24:02.829974",
+  "title": "Movies",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "titleLabel": "title",
+  "@titleLabel": {
+    "description": "titleLabel for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "descriptionLabel": "description",
+  "@descriptionLabel": {
+    "description": "descriptionLabel for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  },
+  "add": "Add new Movies",
+  "@add": {
+    "description": "add for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}
