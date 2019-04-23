@@ -1,0 +1,9 @@
+{"@@locale": "en",
+  "@@last_modified": "2019-04-22T18:52:54.241475",
+  "title": "Movies",
+  "@title": {
+    "description": "Title for the Demo application",
+    "type": "text",
+    "placeholders": {}
+  }
+}

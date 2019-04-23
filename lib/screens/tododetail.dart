@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/locale/locales.dart';
 import 'package:flutter_app/model/todo.dart';
 import 'package:flutter_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
@@ -43,7 +44,7 @@ class TodoDetailState extends State {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(todo.title == '' ? 'Add new Item' : todo.title),
+        title: Text(todo.title == '' ? AppLocalizations.of(context).title() : todo.title),
         actions: <Widget>[
           PopupMenuButton<String>(
               onSelected: select,
