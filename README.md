@@ -41,8 +41,8 @@ Connect your device on the machine and run, or run on the emulator
 
 ## Screen
 
-![](images/home.png  | width=100)
-![](images/addnewmovie.png  | width=48)
+![](images/home.png)
+![](images/addnewmovie.png)
 
 
 ## License
