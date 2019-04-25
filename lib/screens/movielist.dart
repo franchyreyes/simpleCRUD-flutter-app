@@ -1,38 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/todo.dart';
+import 'package:flutter_app/model/movie.dart';
 import 'package:flutter_app/util/dbhelper.dart';
-import 'package:flutter_app/screens/tododetail.dart';
+import 'package:flutter_app/screens/moviedetail.dart';
 
-class TodoList extends StatefulWidget {
+class MovieList extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => TodoListState();
+  State<StatefulWidget> createState() => MovieListState();
 }
 
-class TodoListState extends State {
+class MovieListState extends State {
   DbHelper helper = DbHelper();
-  List<Todo> todos;
+  List<Movie> movies;
   int count = 0;
 
   @override
   Widget build(BuildContext context) {
-    if (todos == null) {
-      todos = List<Todo>();
+    if (movies == null) {
+      movies = List<Movie>();
       getData();
     }
 
     return Scaffold(
-      body: todoListItems(),
+      body: movieListItems(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          navigateToDetail(Todo('', 3, ''));
+          navigateToDetail(Movie('', 3, ''));
         },
-        tooltip: "Add new Todo",
+        tooltip: "Add new",
         child: Icon(Icons.add),
       ),
     );
   }
 
-  ListView todoListItems() {
+  ListView movieListItems() {
     return ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext context, int position) {
@@ -41,14 +41,13 @@ class TodoListState extends State {
             elevation: 2.0,
             child: ListTile(
               leading: CircleAvatar(
-                backgroundColor: getColor(this.todos[position].priority),
-                child: Text(this.todos[position].id.toString()),
+                backgroundColor: getColor(this.movies[position].priority),
+                child: Text(this.movies[position].id.toString()),
               ),
-              title: Text(this.todos[position].title),
-              subtitle: Text(this.todos[position].date),
+              title: Text(this.movies[position].title),
+              subtitle: Text(this.movies[position].date),
               onTap: () {
-                //debugPrint("Tapped on " + this.todos[position].id.toString());
-                navigateToDetail(this.todos[position]);
+                navigateToDetail(this.movies[position]);
               },
             ),
           );
@@ -58,20 +57,17 @@ class TodoListState extends State {
   void getData() {
     final dbFuture = helper.initializeDb();
     dbFuture.then((result) {
-      final todosFuture = helper.getTodos();
-      todosFuture.then((result) {
-        List<Todo> todoList = List<Todo>();
+      final moviesFuture = helper.getMovies();
+      moviesFuture.then((result) {
+        List<Movie> movieList = List<Movie>();
         count = result.length;
         for (int i = 0; i < count; i++) {
-          todoList.add(Todo.fromObject(result[i]));
-          debugPrint(todoList[i].title);
+          movieList.add(Movie.fromObject(result[i]));
         }
         setState(() {
-          todos = todoList;
+          movies = movieList;
           count = count;
         });
-
-        debugPrint("Items " + count.toString());
       });
     });
   }
@@ -92,9 +88,9 @@ class TodoListState extends State {
     }
   }
 
-  void navigateToDetail(Todo todo) async {
+  void navigateToDetail(Movie movie) async {
     bool result = await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => TodoDetail(todo)));
+        context, MaterialPageRoute(builder: (context) => MovieDetail(movie)));
 
     if (result) {
       getData();

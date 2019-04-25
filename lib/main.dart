@@ -1,6 +1,6 @@
 import 'package:flutter_app/locale/locales.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/todolist.dart';
+import 'package:flutter_app/screens/movielist.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: new AppBar(
         title: Text(AppLocalizations.of(context).title()),
       ),
-      body: TodoList(),
+      body: MovieList(),
     );
   }
 }

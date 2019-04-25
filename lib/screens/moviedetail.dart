@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/locale/locales.dart';
-import 'package:flutter_app/model/todo.dart';
+import 'package:flutter_app/model/movie.dart';
 import 'package:flutter_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 
-class TodoDetail extends StatefulWidget {
-  final Todo todo;
+class MovieDetail extends StatefulWidget {
+  final Movie movie;
 
-  TodoDetail(this.todo);
+  MovieDetail(this.movie);
 
   @override
-  State<StatefulWidget> createState() => TodoDetailState(todo);
+  State<StatefulWidget> createState() => MovieDetailState(movie);
 }
 
-class TodoDetailState extends State {
-  Todo todo;
+class MovieDetailState extends State {
+  Movie movie;
 
-  TodoDetailState(this.todo);
+  MovieDetailState(this.movie);
 
   final _priorities = ['High', 'Medium', 'Low'];
-  //String _priority = 'Low';
 
   DbHelper dbHelper = DbHelper();
 
   final List<String> choices = const <String>[
-    'Save Todo & Back',
-    'Delete Todo',
+    'Save & Back',
+    'Delete',
     'Back to List'
   ];
 
-  static const menuSave = 'Save Todo & Back';
-  static const menuDelete = 'Delete Todo';
+  static const menuSave = 'Save & Back';
+  static const menuDelete = 'Delete';
   static const menuBack = 'Back to List';
 
   TextEditingController titleController = TextEditingController();
@@ -38,13 +37,20 @@ class TodoDetailState extends State {
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = todo.title;
-    descriptionController.text = todo.description;
-    TextStyle textStyle = Theme.of(context).textTheme.title;
+    titleController.text = movie.title;
+    descriptionController.text = movie.description;
+    TextStyle textStyle = TextStyle(
+        fontSize: 16.0,
+        decoration: TextDecoration.none,
+        fontFamily: 'Oxygen',
+        fontWeight: FontWeight.w300);
+    //TextStyle textStyle = Theme.of(context).textTheme.title;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(todo.title == '' ? AppLocalizations.of(context).add() : todo.title),
+        title: Text(
+            movie.title == '' ? AppLocalizations.of(context).add() : movie
+                .title),
         actions: <Widget>[
           PopupMenuButton<String>(
               onSelected: select,
@@ -81,7 +87,8 @@ class TodoDetailState extends State {
                         onChanged: (value) => this.updateDescription(),
                         style: textStyle,
                         decoration: InputDecoration(
-                            labelText: AppLocalizations.of(context).descriptionLabel(),
+                            labelText:
+                            AppLocalizations.of(context).descriptionLabel(),
                             labelStyle: textStyle,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(5.0))),
@@ -94,8 +101,8 @@ class TodoDetailState extends State {
                               child: Text(data),
                             );
                           }).toList(),
-                          value: retrievePriority(todo.priority),
-                          style: textStyle,
+                          value: retrievePriority(movie.priority),
+                          //style: textStyle,
                           onChanged: (data) => updatePriority(data))),
                 ],
               ),
@@ -112,14 +119,14 @@ class TodoDetailState extends State {
         break;
       case menuDelete:
         Navigator.pop(context, true);
-        if (todo.id == null) {
+        if (movie.id == null) {
           return;
         }
-        result = await dbHelper.deleteTodo(todo.id);
+        result = await dbHelper.deleteMovie(movie.id);
         if (result != 0) {
           AlertDialog alertDialog = AlertDialog(
-            title: Text("Delete Todo"),
-            content: Text("The todo has been"),
+            title: Text("Delete"),
+            content: Text("The item has been deleted"),
           );
           showDialog(context: context, builder: (_) => alertDialog);
         }
@@ -132,11 +139,11 @@ class TodoDetailState extends State {
   }
 
   void save() {
-    todo.date = new DateFormat.yMd().format(DateTime.now());
-    if (todo.id != null) {
-      dbHelper.updateTodo(todo);
+    movie.date = new DateFormat.yMd().format(DateTime.now());
+    if (movie.id != null) {
+      dbHelper.updateMovie(movie);
     } else {
-      dbHelper.insertTodo(todo);
+      dbHelper.insertMovie(movie);
     }
     Navigator.pop(context, true);
   }
@@ -144,18 +151,16 @@ class TodoDetailState extends State {
   void updatePriority(String value) {
     switch (value) {
       case "High":
-        todo.priority = 1;
+        movie.priority = 1;
         break;
       case "Medium":
-        todo.priority = 2;
+        movie.priority = 2;
         break;
       case "Low":
-        todo.priority = 3;
+        movie.priority = 3;
         break;
     }
-    setState(() {
-      //_priority = value;
-    });
+    setState(() {});
   }
 
   String retrievePriority(int value) {
@@ -163,10 +168,10 @@ class TodoDetailState extends State {
   }
 
   void updateTitle() {
-    todo.title = titleController.text;
+    movie.title = titleController.text;
   }
 
   void updateDescription() {
-    todo.description = descriptionController.text;
+    movie.description = descriptionController.text;
   }
 }

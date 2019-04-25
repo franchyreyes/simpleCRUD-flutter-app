@@ -2,11 +2,11 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_app/model/todo.dart';
+import 'package:flutter_app/model/movie.dart';
 
 class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
-  String tblTodo = "todo";
+  String tblMovie = "movie";
   String colId = "id";
   String colTitle = "title";
   String colDescription = "description";
@@ -31,50 +31,50 @@ class DbHelper {
 
   Future<Database> initializeDb() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + "todos.db";
+    String path = dir.path + "movie.db";
     var dbTodos = await openDatabase(path, version: 1, onCreate: _createDb);
     return dbTodos;
   }
 
   void _createDb(Database db, int newVersion) async {
-    String sql = "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTitle TEXT, " +
+    String sql = "CREATE TABLE $tblMovie($colId INTEGER PRIMARY KEY, $colTitle TEXT, " +
         "$colDescription TEXT,$colPriority INTEGER, $colDate TEXT)";
     await db.execute(sql);
   }
 
-  Future<int> insertTodo(Todo todo) async {
+  Future<int> insertMovie(Movie movie) async {
     Database db = await this.db;
-    var result = await db.insert(tblTodo, todo.toMap());
+    var result = await db.insert(tblMovie, movie.toMap());
     return result;
   }
 
-  Future<List> getTodos() async {
+  Future<List> getMovies() async {
     Database db = await this.db;
     var result = await db.rawQuery(
-        "SELECT * from $tblTodo order by $colPriority DESC");
+        "SELECT * from $tblMovie order by $colPriority DESC");
     return result;
   }
 
-  Future<int> getCount(Todo todo) async {
+  Future<int> getCount(Movie movie) async {
     Database db = await this.db;
     var result = Sqflite.firstIntValue(
-        await db.rawQuery("SELECT COUNT(*) FROM $tblTodo")
+        await db.rawQuery("SELECT COUNT(*) FROM $tblMovie")
     );
 
     return result;
   }
 
-  Future<int> updateTodo(Todo todo) async {
+  Future<int> updateMovie(Movie movie) async {
     Database db = await this.db;
     var result = await db.update(
-        tblTodo, todo.toMap(), where: "$colId = ?", whereArgs: [todo.id]);
+        tblMovie, movie.toMap(), where: "$colId = ?", whereArgs: [movie.id]);
     return result;
   }
 
-  Future<int> deleteTodo(int id) async {
+  Future<int> deleteMovie(int id) async {
     Database db = await this.db;
     int result;
-    result = await db.rawDelete("DELETE FROM $tblTodo WHERE $colId = $id");
+    result = await db.rawDelete("DELETE FROM $tblMovie WHERE $colId = $id");
     return result;
   }
 
