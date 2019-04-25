@@ -29,7 +29,7 @@ git clone https://github.com/franchyreyes/simpleCRUD-flutter-app
 
 2- Using the Dart intl tools
 
-With the appâ€™s root directory as the current directory and run this code in the console
+With the app’s root directory as the current directory and run this code in the console
 ```
 flutter packages pub run intl_translation:generate_from_arb  --output-dir=lib/l10n --no-use-deferred-loading  lib/l10n/intl_en.arb lib/l10n/intl_es.arb lib/locale/locales.dart
 ```
@@ -41,8 +41,8 @@ Connect your device on the machine and run, or run on the emulator
 
 ## Screen
 
-![](images/home.png)
-![](images/addnewmovie.png)
+<img src='images/home.png' width=200 height=200 />
+<img src='images/addnewmovie.png' width=200 height=200 />
 
 ## License
 
