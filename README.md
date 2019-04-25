@@ -33,7 +33,7 @@ With the app’s root directory as the current directory and run this code in th
 ```
 flutter packages pub run intl_translation:generate_from_arb  --output-dir=lib/l10n --no-use-deferred-loading  lib/l10n/intl_en.arb lib/l10n/intl_es.arb lib/locale/locales.dart
 ```
-Note: references [internazionalization]https://flutter.dev/docs/development/accessibility-and-localization/internationalization
+Note: references [internationalization]https://flutter.dev/docs/development/accessibility-and-localization/internationalization
 
 3- Start using
 
