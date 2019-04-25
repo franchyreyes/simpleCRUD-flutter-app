@@ -41,8 +41,8 @@ Connect your device on the machine and run, or run on the emulator
 
 ## Screen
 
-<img src="images/home.png" width="200" height="200" />
-<img src="images/addnewmovie.png" width="200" height="200" />
+<img src="images/home.png" width="200" />
+
 
 ## License
 
